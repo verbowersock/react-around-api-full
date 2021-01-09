@@ -1,0 +1,9 @@
+.images__picture_fullscreen {
+  width: auto;
+  height: auto;
+  max-height: 75vh;
+  max-width: 75vw;
+  position: relative;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

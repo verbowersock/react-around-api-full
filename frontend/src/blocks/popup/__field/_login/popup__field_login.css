@@ -1,0 +1,15 @@
+.popup__field_login {
+    border: none;
+    border-bottom: 2px solid rgba(253, 253, 253);
+    margin-left: 36px;
+    margin-top: 30px;
+    width: 358px;
+    background-color: black;
+    height: 27px;
+    color: white;
+}
+
+.popup__field_login::placeholder {
+    color:white;
+    font-size: 14px;
+  }

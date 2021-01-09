@@ -1,0 +1,11 @@
+.images__text {
+    margin: 0;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 1;
+    max-width: 220px;
+    height: 26px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

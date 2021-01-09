@@ -1,0 +1,10 @@
+.popup__content_fullscreen {
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+} 

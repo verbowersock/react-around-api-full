@@ -1,0 +1,18 @@
+.popup__form_delete {
+    padding-bottom: 20px;
+    height: 181px;
+}
+
+@media screen and (max-width: 550px) {
+    .popup__form_delete {
+        padding-bottom:15px;
+        height: 140px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .popup__form_delete {
+        padding-bottom:6px;
+        height: 120px;
+    }
+}

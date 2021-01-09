@@ -1,0 +1,34 @@
+
+
+.popup__content {
+    background: none;
+    position: fixed;
+    width: 470px;
+    height: 370px;
+    top: 50%;
+    left: 50%;
+    margin-top: -185px;
+    margin-left: -235px;
+}
+
+@media screen and (max-width: 550px) {
+    .popup__content {
+        background: none;
+        position: fixed;
+        max-width: 360px;
+        height: 270px;
+        margin-top: -135px;
+        margin-left: -180px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .popup__content {
+        background: none;
+        position: fixed;
+        max-width: 300px;
+        height: 230px;
+        margin-top: -115px;
+        margin-left: -150px;
+    }
+}

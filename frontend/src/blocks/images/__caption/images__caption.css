@@ -1,0 +1,6 @@
+.images__caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 21px 31px; 
+}

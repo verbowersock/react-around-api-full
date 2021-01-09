@@ -1,0 +1,11 @@
+.header__link {
+    font-family: Inter;
+    font-size: 18px;
+    line-height: 17px;
+    color: white; 
+    text-decoration:none;
+    margin-left: 24px;
+}
+.header__link:visited{
+    color: white; 
+}

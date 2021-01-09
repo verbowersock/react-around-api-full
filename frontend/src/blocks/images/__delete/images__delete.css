@@ -1,0 +1,13 @@
+.images__delete {
+  background: url("../../../Images/delete.png") no-repeat center;
+  height: 19px;
+  width: 21px;
+  border: none;
+  margin-top: 19px;
+  margin-left: 250px;
+}
+
+.images__delete:hover{
+  opacity: 0.6;
+  transition: opacity 0.3s ease-in-out;
+}

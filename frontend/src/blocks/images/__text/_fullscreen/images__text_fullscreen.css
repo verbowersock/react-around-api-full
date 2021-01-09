@@ -1,0 +1,8 @@
+.images__text_fullscreen {
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ffffff;
+  position: relative;
+  bottom:-10px;
+}

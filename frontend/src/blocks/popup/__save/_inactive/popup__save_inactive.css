@@ -1,0 +1,7 @@
+.popup__save_inactive {
+    opacity: 0.2;
+    border: 1px solid #000000;
+    border-radius: 2px;
+    background-color: white;
+    color: black;
+}

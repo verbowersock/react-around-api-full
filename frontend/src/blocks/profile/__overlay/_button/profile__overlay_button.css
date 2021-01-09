@@ -1,0 +1,15 @@
+.profile__overlay_button {
+    background-image: url("../../../../Images/pencil.svg");
+    background-color: rgba(0,0,0,0);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border: none;
+    height: 26px;
+    width: 26px;
+    position: relative;
+    left: 46px;
+    top: 51px;
+    z-index: 0;
+    opacity: 1;
+}
+

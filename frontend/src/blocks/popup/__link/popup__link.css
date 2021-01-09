@@ -1,0 +1,12 @@
+.popup__link {
+    font-family: Inter;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #FFFFFF; 
+    text-decoration:none;
+    margin-left: 105px;
+}
+.popup__link:visited{
+    color: #FFFFFF; 
+}

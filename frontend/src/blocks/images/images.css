@@ -1,0 +1,21 @@
+@import url("./__caption/images__caption.css");
+@import url("./__like/images__like.css");
+@import url("./__like-button/images__like-button.css");
+@import url("./__like-button/_active/images__like-button_active.css");
+@import url("./__like-count/images__like-count.css");
+@import url("./__list/images__list.css");
+@import url("./__picture/images__picture.css");
+@import url("./__delete/images__delete.css");
+@import url("./__text/images__text.css");
+@import url("./__card/images__card.css");
+@import url("./__picture/_fullscreen/images__picture_fullscreen.css");
+@import url("./__text/_fullscreen/images__text_fullscreen.css");
+@import url("./__delete/_hidden/images__delete_hidden.css");
+
+.images {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    height: auto;
+}
