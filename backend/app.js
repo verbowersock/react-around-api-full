@@ -2,16 +2,17 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
+const cors = require('cors');
 const users = require('./routes/users.js');
 const cards = require('./routes/cards.js');
 const auth = require('./middleware/auth.js');
 const { login, createUser } = require('./controllers/users');
-const { requestLogger, errorLogger } = require('./middleware/logger'); 
+const { requestLogger, errorLogger } = require('./middleware/logger');
 
 const { PORT = 3000 } = process.env;
 
 const app = express();
-
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.connect('mongodb://localhost:27017/aroundb', {
@@ -21,9 +22,16 @@ mongoose.connect('mongodb://localhost:27017/aroundb', {
 });
 
 app.listen(PORT, () => {
+  console.log(`App listening at port ${PORT}`);
 });
 
 app.use(requestLogger);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Server will crash now');
+  }, 0);
+});
 
 app.post('/login', celebrate({
   body: Joi.object().keys({
@@ -50,7 +58,7 @@ app.use((req, res) => {
 });
 
 app.use(errors());
-app.use(errorLogger); 
+app.use(errorLogger);
 
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;

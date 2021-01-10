@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
+
 const bcrypt = require('bcrypt');
 const uniqueValidator = require('mongoose-unique-validator');
 
@@ -18,14 +18,22 @@ const userSchema = new mongoose.Schema({
   },
   avatar: {
     type: String,
-    validate: /https?:\/\/(www)?.\S*/gi,
+    validate: {
+      validator(v) {
+        return /https?:\/\/(www)?.\S*/gi.test(v);
+      },
+    },
     default: 'https://pictures.s3.yandex.net/resources/avatar_1604080799.jpg',
   },
   email: {
     type: String,
     required: true,
     unique: true,
-    validate: validator.isEmail,
+    validate: {
+      validator(v) {
+        return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v);
+      },
+    },
   },
   password: {
     type: String,

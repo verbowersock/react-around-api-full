@@ -4,14 +4,14 @@ const Card = require('../models/card');
 
 module.exports.getCards = (req, res, next) => {
   Card.find({})
-    .then((cards) => res.send({ data: cards }))
+    .then((cards) => res.send(cards))
     .catch(next);
 };
 
 module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
   Card.create({ name, link, owner: req.user._id })
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'CastError' || err.name === 'ValidationError') {
         throw new BadRequestError('Invalid data');
@@ -48,13 +48,14 @@ module.exports.likeCard = (req, res, next) => {
       if (!card) {
         throw new NotFoundError('Card ID not found');
       }
-      res.send({ data: card.likes });
+      res.send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError' || err.name === 'ValidationError') {
         throw new BadRequestError('Invalid ID format');
       }
       next(err);
+      console.log(err);
     })
     .catch(next);
 };
@@ -69,7 +70,7 @@ module.exports.dislikeCard = (req, res, next) => {
       if (!card) {
         throw new NotFoundError('Card ID not found');
       }
-      res.send({ data: card.likes });
+      res.send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError' || err.name === 'ValidationError') {
