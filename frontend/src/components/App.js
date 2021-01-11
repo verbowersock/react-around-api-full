@@ -303,4 +303,4 @@ React.useEffect(() => {
   );
 }
 
-export default withRouter(App);
+export default App;
