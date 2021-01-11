@@ -47,7 +47,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [loggedIn]);
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i === currentUser._id);
@@ -223,7 +223,7 @@ React.useEffect(() => {
     .catch((err) => {
       console.log(err);
     });
-}, [loggedIn]);
+}, [token]);
 
   return (
     <CurrentUserContext.Provider value = {currentUser}>

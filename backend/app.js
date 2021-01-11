@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const history = require("connect-history-api-fallback");
 const helmet = require('helmet');
 const { celebrate, Joi, errors } = require('celebrate');
 const rateLimit = require('express-rate-limit');
@@ -33,6 +34,9 @@ mongoose.connect('mongodb://localhost:27017/aroundb', {
   useFindAndModify: false,
 });
 
+app.use(history({
+  logger: console.log.bind(console),
+}));
 app.listen(PORT, () => {
   console.log(`App listening at port ${PORT}`);
 });
