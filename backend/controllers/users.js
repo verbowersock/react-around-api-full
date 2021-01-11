@@ -5,6 +5,8 @@ const NotFoundError = require('../errors/NotFound');
 const UnauthorizedError = require('../errors/Unauthorized');
 const User = require('../models/user');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 module.exports.getUsers = (res, next) => {
   User.find({})
     .then((users) => res.send(users))
@@ -90,7 +92,7 @@ module.exports.login = (req, res, next) => {
       if (!user) {
         throw new UnauthorizedError('Incorrect password or email.');
       } else {
-        const token = jwt.sign({ _id: user._id }, 'practicum', { expiresIn: '7d' });
+        const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'practicum', { expiresIn: '7d' });
         res.cookie('token', token, { httpOnly: true });
         res.json({ token });
       }
