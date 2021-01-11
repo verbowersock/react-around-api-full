@@ -1,14 +1,13 @@
 class Api {
     constructor (options) {
         this.url = options.baseUrl;
-        this.authorization = options.authorization;
     }
 
 
-getInitialCards() {
-    return fetch(this.url+"cards", {
-        headers: {
-            authorization: this.authorization
+getInitialCards(token) {
+    return fetch(this.url+"/cards", {
+        headers:{
+            authorization: "Bearer " + token,
         }
     })
     .then(res=> {
@@ -20,10 +19,10 @@ getInitialCards() {
     })
     }
 
-getUserInfo(){
-    return fetch(this.url+"users/me", {
+getUserInfo(token){
+    return fetch(this.url+"/users/me", {
         headers:{
-            authorization: this.authorization
+            authorization: "Bearer " + token,
         }
     })
     .then(res=> {
@@ -35,11 +34,11 @@ getUserInfo(){
     })
     }
 
-updateUserInfo(newInfo){
-    return fetch(this.url+"users/me", {
+updateUserInfo(newInfo, token){
+    return fetch(this.url+"/users/me", {
         method: "PATCH",
-        headers: {
-            authorization: this.authorization,
+        headers:{
+            authorization: "Bearer " + token,
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
@@ -56,11 +55,11 @@ updateUserInfo(newInfo){
         })
     }
 
-postNewCard(newCard) {
-        return fetch(this.url+"cards", {
+postNewCard(newCard, token) {
+        return fetch(this.url+"/cards", {
             method: "POST",
-            headers: {
-                authorization: this.authorization,
+            headers:{
+                authorization: "Bearer " + token,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
@@ -78,11 +77,11 @@ postNewCard(newCard) {
     
 }    
 
-deleteCard(id)    {
-    return fetch(this.url+"cards"+ "/" + id, {
+deleteCard(id, token)    {
+    return fetch(this.url+"/cards"+ "/" + id, {
     method: "DELETE",
-    headers: {
-        authorization: this.authorization,
+    headers:{
+            authorization: "Bearer " + token,
         "Content-Type": "application/json"
     },
 })
@@ -96,12 +95,12 @@ deleteCard(id)    {
 
 }    
 
-addLike(id, isLiked) {
+addLike(id, isLiked, token) {
     const method = isLiked ? "DELETE" : "PUT";
-    return fetch(this.url+"cards/likes/"+id, {
+    return fetch(this.url+"/cards/"+id+"/likes", {
         method: method,
         headers:{
-            authorization: this.authorization
+            authorization: "Bearer " + token
         }
     })
     .then(res=> {
@@ -113,11 +112,11 @@ addLike(id, isLiked) {
     })
     }
 
-updateAvatar(avatarUrl) {
-    return fetch(this.url+"users/me/avatar", {
+updateAvatar(avatarUrl, token) {
+    return fetch(this.url+"/users/me/avatar", {
         method: "PATCH",
-        headers: {
-            authorization: this.authorization,
+        headers:{
+            authorization: "Bearer " + token,
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
@@ -137,8 +136,7 @@ updateAvatar(avatarUrl) {
 }    
 
 export const api = new Api({
-    baseUrl: "https://around.nomoreparties.co/v1/group-5/",
-    authorization: "c3db06be-da70-4990-b8ca-8515a1d7c281",     
+    baseUrl: "api.vbowe.students.nomoreparties.site",
     }
   );
 

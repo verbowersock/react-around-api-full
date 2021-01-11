@@ -8,7 +8,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddNewCardPopup from './AddNewCardPopup';
-import {Route, Switch, useHistory } from 'react-router-dom';
+import {Route, Switch, useHistory, withRouter } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute'
 import Login from './Login'
 import Register from './Register'
@@ -29,16 +29,20 @@ function App() {
   const [tooltipType, setTooltipType] = React.useState('');
   const [userEmail, setUserEmail] = React.useState("");
   const [userPassword, setUserPassword] = React.useState("");
-  const [userRegistered, setUserRegistered] = React.useState(false)
+  const [userRegistered, setUserRegistered] = React.useState(false);
+  const token = localStorage.getItem('jwt')
+
+
 
   const history = useHistory({forceRefresh:true});
   
 
   React.useEffect(() => {
     api
-      .getInitialCards()
+      .getInitialCards(token)
       .then((result) => {
-        setCards(result);
+        result = Array.from(result);
+        setCards(result)
       })
       .catch((err) => {
         console.log(err);
@@ -46,8 +50,8 @@ function App() {
   }, []);
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
-    api.addLike(card._id, isLiked)
+    const isLiked = card.likes.some(i => i === currentUser._id);
+    api.addLike(card._id, isLiked, token)
     .then((newCard) => {
       const newCards = cards.map((c) => c._id === card._id ? newCard: c);
       setCards(newCards);
@@ -58,7 +62,7 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    api.deleteCard(card._id)
+    api.deleteCard(card._id, token)
     .then(() => {
       const newCards = cards.filter((c) => c._id !== card._id);
       setCards(newCards);
@@ -93,7 +97,7 @@ function handleCardClick(card) {
 }
 
 function handleUpdateUser({name, about}) {
-  api.updateUserInfo({name, about})
+  api.updateUserInfo({name, about}, token)
   .then((data)=> {
     setCurrentUser(data);
   })
@@ -104,7 +108,7 @@ function handleUpdateUser({name, about}) {
 }
 
 function handleUpdateAvatar({avatar}) {
-  api.updateAvatar(avatar.current.value)
+  api.updateAvatar(avatar.current.value, token)
   .then((data) => {
   setCurrentUser(data);
 })
@@ -120,7 +124,7 @@ function handleToolTip(type) {
 }
 
 function handleAddPlaceSubmit({title, url}) {
-  api.postNewCard({title, url}).then((data) => {
+  api.postNewCard({title, url}, token).then((data) => {
     setCards([data, ...cards])
   })
   .catch ((error) => {
@@ -137,7 +141,7 @@ function resetForm () {
 function handleRegistration() {
     auth.register(userEmail, userPassword)
       .then((res) => {
-        if (!res.data) {
+        if (!res) {
           handleToolTip('fail');
           resetForm();
           throw new Error(`400 - one of the fields was filled in incorrectly`);
@@ -170,14 +174,16 @@ function handleRegistration() {
         else if (!res) {
           handleToolTip('fail');
           resetForm(); 
-          throw new Error('01 - the user with the specified email not found');
+          throw new Error('401 - Email or password are incorrect');
         }
       })
       .then(() => {
         setLoggedIn(true)
+
       })
       .then(() => {
         history.push('/');
+       
       })
       .catch((err) => console.log(err.message));
   };
@@ -189,13 +195,13 @@ function handleRegistration() {
   }
 
   React.useEffect(() => {
-    const token = localStorage.getItem('jwt');
+    
     if (token) {
       auth
         .checkToken(token)
         .then((res) => {
           setLoggedIn(true);
-          setUserEmail(res.data.email);
+          setUserEmail(res.email);
         })
         .then(()=> 
         history.push("/"))
@@ -210,14 +216,14 @@ function handleRegistration() {
 
 React.useEffect(() => {
   api
-    .getUserInfo()
+    .getUserInfo(token)
     .then((result) => {
       setCurrentUser(result);
     })
     .catch((err) => {
       console.log(err);
     });
-}, []);
+}, [loggedIn]);
 
   return (
     <CurrentUserContext.Provider value = {currentUser}>
@@ -297,4 +303,4 @@ React.useEffect(() => {
   );
 }
 
-export default App;
+export default withRouter(App);

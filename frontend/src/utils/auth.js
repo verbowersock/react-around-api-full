@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://register.nomoreparties.co';
+export const BASE_URL = 'api.vbowe.students.nomoreparties.site';
 
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
@@ -19,7 +19,7 @@ export const register = (email, password) => {
 };
 
 export const authorize = (email, password) => {
-  return fetch(`${BASE_URL}/signin`, {
+  return fetch(`${BASE_URL}/login`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
