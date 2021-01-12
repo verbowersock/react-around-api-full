@@ -47,7 +47,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, [loggedIn]);
+  }, [token]);
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i === currentUser._id);
