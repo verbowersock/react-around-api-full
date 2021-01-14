@@ -149,7 +149,7 @@ function handleRegistration() {
         })
         .then((res) => {
           setUserRegistered(true);
-          history.push('/login');
+          history.push('/signin');
           return res;
         })
         .then((res) => {
@@ -191,7 +191,7 @@ function handleRegistration() {
   function handleSignOut () {
     localStorage.removeItem('jwt');
     setLoggedIn(false);
-    history.push('/login');
+    history.push('/signin');
   }
 
   React.useEffect(() => {
@@ -234,7 +234,7 @@ React.useEffect(() => {
         onSignOut = {handleSignOut}
       />
       <Switch>
-      <Route exact path="/login">
+      <Route exact path="/signin">
             <Login 
              userEmail = {userEmail}
              setUserEmail = {setUserEmail}

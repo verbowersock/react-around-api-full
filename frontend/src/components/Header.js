@@ -11,10 +11,10 @@ function Header(props) {
     function getProperties(){
     if (location.pathname === "/signup") { 
       properties.text ="Log in"
-      properties.route = "/login"
+      properties.route = "/signin"
       properties.email = ""
     }
-    else if (location.pathname === "/login") {
+    else if (location.pathname === "/signin") {
       properties.text ="Sign up"
       properties.route = "/signup"
       properties.email = ""
@@ -22,7 +22,7 @@ function Header(props) {
     else {
       properties.text ="Log out"
       properties.email = props.userEmail
-      properties.route = '/login'
+      properties.route = '/signin'
     }
     return properties
   }
@@ -35,7 +35,7 @@ function Header(props) {
 
     {properties.email}
     
-    <Link to = {properties.route} className={`header__link `+ (location.pathname === "/signup"||location.pathname ==="/login" ? '':'header__link_logged-in')} onClick = {location.pathname === "/"?props.onSignOut:null}> 
+    <Link to = {properties.route} className={`header__link `+ (location.pathname === "/signup"||location.pathname ==="/signin" ? '':'header__link_logged-in')} onClick = {location.pathname === "/"?props.onSignOut:null}> 
     {properties.text}
     </Link>
     </div>

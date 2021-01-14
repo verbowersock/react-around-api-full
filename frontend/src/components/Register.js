@@ -50,7 +50,7 @@ function Register(props) {
           defaultValue="Sign Up"
           onClick={props.onSubmit}
       />
-       <Link className='popup__link' to='/login'>
+       <Link className='popup__link' to='/signin'>
         Already a member? Log in here!
         </Link>
     </PopupWithForm>
