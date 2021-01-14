@@ -31,7 +31,7 @@ router.patch('/me/avatar', celebrate({
     authorization: Joi.string().regex(/^(Bearer )[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_.+/=]*$/).required(),
   }).unknown(true),
   body: Joi.object().keys({
-    avatar: Joi.string().required().uri({ scheme: ['http', 'https'] }),
+    avatar: Joi.string().required().pattern(/https?:\/\/(www)?.\S*/gi),
   }),
 }), updateAvatar);
 

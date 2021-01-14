@@ -19,7 +19,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "scp -r ./build/* vermelon@20.51.237.103:/home/vermelon/react-around-api-full/ready/"
+    "deploy": "scp -r ./build/* vermelon@20.51.237.103:/home/vermelon/react-around-api-full/"
   },
   "eslintConfig": {
     "extends": [

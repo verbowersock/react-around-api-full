@@ -34,6 +34,7 @@ mongoose.connect('mongodb://localhost:27017/aroundb', {
 });
 
 app.listen(PORT, () => {
+  // eslint-disable-next-line no-console
   console.log(`App listening at port ${PORT}`);
 });
 
@@ -72,6 +73,7 @@ app.use((req, res) => {
 app.use(errors());
 app.use(errorLogger);
 
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
   res

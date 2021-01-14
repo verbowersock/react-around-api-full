@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const BadRequestError = require('../errors/BadRequest');
 const NotFoundError = require('../errors/NotFound');
 const Card = require('../models/card');
