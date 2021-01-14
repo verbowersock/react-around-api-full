@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const BadRequestError = require('../errors/BadRequest');
+const ConflictError = require('../errors/Conflict');
 const NotFoundError = require('../errors/NotFound');
 const UnauthorizedError = require('../errors/Unauthorized');
 const User = require('../models/user');
@@ -100,6 +101,8 @@ module.exports.login = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'CastError' || err.name === 'ValidationError') {
         throw new BadRequestError('Invalid data');
+      } else if (err.name === 'MongoError') {
+        throw new ConflictError('User with those credentials already exists');
       }
       next(err);
     })
