@@ -3,6 +3,7 @@ const BadRequestError = require('../errors/BadRequest');
 const ForbiddenError = require('../errors/Forbidden');
 const NotFoundError = require('../errors/NotFound');
 const Card = require('../models/card');
+const { delete } = require('../routes/users');
 
 module.exports.getCards = (req, res, next) => {
   Card.find({})
@@ -27,8 +28,8 @@ module.exports.deleteCard = (req, res, next) => {
   Card.findById(req.params.cardId)
     .then((card) => {
       if (card && req.user._id.toString() === card.owner.toString()) {
-        Card.deleteOne(card).then(() => {
-          res.send('card deleted');
+        Card.deleteOne(card).then((deletedCard) => {
+          res.send(deletedCard);
         });
       } else if (!card) {
         throw new NotFoundError('Card not found.');
