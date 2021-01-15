@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     validate: {
       validator(v) {
-        return /https?:\/\/(www)?.\S*/gi.test(v);
+        return /(https?:\/\/(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9])(:?\d*)\/?([a-z_/0-9\-#.]*)\??([a-z_/0-9\-#=&]*)/gi.test(v);
       },
     },
     default: 'https://pictures.s3.yandex.net/resources/avatar_1604080799.jpg',

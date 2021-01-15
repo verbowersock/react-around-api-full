@@ -2,7 +2,7 @@
 const BadRequestError = require('../errors/BadRequest');
 const ForbiddenError = require('../errors/Forbidden');
 const NotFoundError = require('../errors/NotFound');
-const UnauthorizedError = require('../errors/Unauthorized');
+
 const Card = require('../models/card');
 
 module.exports.getCards = (req, res, next) => {
