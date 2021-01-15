@@ -28,8 +28,8 @@ module.exports.deleteCard = (req, res, next) => {
   Card.findById(req.params.cardId)
     .then((card) => {
       if (card && req.user._id.toString() === card.owner.toString()) {
-        Card.deleteOne(card).then((deletedCard) => {
-          res.send(deletedCard);
+        Card.deleteOne(card).then(() => {
+          res.send('card deleted');
         });
       } else if (!card) {
         throw new NotFoundError('Card not found.');
