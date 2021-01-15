@@ -137,7 +137,7 @@ updateAvatar(avatarUrl, token) {
 
 export const api = new Api({
     baseUrl: "https://api.vbowe.students.nomoreparties.site",
- //baseUrl:"http://localhost"
+// baseUrl:"http://localhost:3000"
     }
   );
 
