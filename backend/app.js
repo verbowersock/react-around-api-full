@@ -10,6 +10,7 @@ const cards = require('./routes/cards.js');
 const auth = require('./middleware/auth.js');
 const { login, createUser } = require('./controllers/users');
 const { requestLogger, errorLogger } = require('./middleware/logger');
+const NotFoundError = require('./errors/NotFound.js');
 
 const { PORT = 3000 } = process.env;
 
@@ -66,8 +67,8 @@ app.post('/signup', celebrate({
 app.use('/cards', auth, cards);
 app.use('/users', auth, users);
 
-app.use((req, res) => {
-  res.status(404).json({ message: 'Page not found' });
+app.use(() => {
+  throw new NotFoundError('Page not found');
 });
 
 app.use(errors());

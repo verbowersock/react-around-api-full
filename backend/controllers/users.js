@@ -42,8 +42,10 @@ module.exports.createUser = (req, res, next) => {
     }))
     .then((user) => res.send({ id: user._id, email: user.email }))
     .catch((err) => {
-      if (err.name === 'CastError' || err.name === 'ValidationError') {
+      if (err.name === 'CastError') {
         throw new BadRequestError('Invalid data');
+      } else if (err.name === 'MongoError' || err.name === 'ValidationError') {
+        throw new ConflictError('User with those credentials already exists');
       }
       next(err);
     })
@@ -101,8 +103,6 @@ module.exports.login = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'CastError' || err.name === 'ValidationError') {
         throw new BadRequestError('Invalid data');
-      } else if (err.name === 'MongoError') {
-        throw new ConflictError('User with those credentials already exists');
       }
       next(err);
     })

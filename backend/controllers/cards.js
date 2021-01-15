@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 const BadRequestError = require('../errors/BadRequest');
 const NotFoundError = require('../errors/NotFound');
+const UnauthorizedError = require('../errors/Unauthorized');
 const Card = require('../models/card');
 
 module.exports.getCards = (req, res, next) => {
@@ -27,6 +28,8 @@ module.exports.deleteCard = (req, res, next) => {
     .then((card) => {
       if (!card) {
         throw new NotFoundError('Card ID not found');
+      }else if (req.user._id != card.owner._id){
+        throw new UnauthorizedError('Only the owner can delete cards')
       }
       res.send({ message: 'deleted successfully' });
     })
