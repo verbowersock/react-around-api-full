@@ -2,6 +2,7 @@
 const BadRequestError = require('../errors/BadRequest');
 const ForbiddenError = require('../errors/Forbidden');
 const NotFoundError = require('../errors/NotFound');
+const UnauthorizedError = require('../errors/Unauthorized');
 const Card = require('../models/card');
 
 module.exports.getCards = (req, res, next) => {
@@ -24,15 +25,17 @@ module.exports.createCard = (req, res, next) => {
 };
 
 module.exports.deleteCard = (req, res, next) => {
-  Card.findByIdAndRemove(req.params.cardId)
+  Card.findById(req.params.cardId)
     .then((card) => {
-      if (!card) {
-        throw new NotFoundError('Card ID not found');
-      } 
-      if (req.user._id.toString() !== card.owner.toString()) {
-        throw new ForbiddenError('Only the owner can delete cards');
+      if (card && req.user._id.toString() === card.owner.toString()) {
+        Card.deleteOne(card).then((deletedCard) => {
+          res.send(deletedCard);
+        });
+      } else if (!card) {
+        throw new NotFoundError('Card not found.');
+      } else {
+        throw new ForbiddenError('You can only delete your own cards.');
       }
-      res.send({ message: 'deleted successfully' });
     })
     .catch((err) => {
       if (err.name === 'CastError' || err.name === 'ValidationError') {
