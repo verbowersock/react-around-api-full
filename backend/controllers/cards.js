@@ -3,7 +3,6 @@ const BadRequestError = require('../errors/BadRequest');
 const ForbiddenError = require('../errors/Forbidden');
 const NotFoundError = require('../errors/NotFound');
 const Card = require('../models/card');
-const { delete } = require('../routes/users');
 
 module.exports.getCards = (req, res, next) => {
   Card.find({})
