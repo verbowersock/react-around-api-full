@@ -28,7 +28,9 @@ module.exports.deleteCard = (req, res, next) => {
     .then((card) => {
       if (!card) {
         throw new NotFoundError('Card ID not found');
-      } else if (req.user._id !== card.owner._id) {
+      } else if (req.user._id !== card.owner) {
+        console.log(req.user._id)
+        console.log(card.owner._id)
         throw new ForbiddenError('Only the owner can delete cards');
       }
       res.send({ message: 'deleted successfully' });
