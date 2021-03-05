@@ -30,7 +30,7 @@ function App() {
   const [userEmail, setUserEmail] = React.useState("");
   const [userPassword, setUserPassword] = React.useState("");
   const [userRegistered, setUserRegistered] = React.useState(false);
-  const token = localStorage.getItem('jwt')
+  const token = localStorage.getItem('token')
 
 
 
@@ -244,6 +244,8 @@ React.useEffect(() => {
             />
             <InfoToolTip
               isOpen={isInfoToolTipOpen}
+
+              
               onClose={closeAllPopups}
               tooltipType = {tooltipType}
               loggedIn={loggedIn}
@@ -284,7 +286,7 @@ React.useEffect(() => {
       <PopupWithImage 
         onClose = {closeAllPopups}
         card = {selectedCard}/>         
-       <ProtectedRoute 
+       <Route 
             path="/" 
             loggedIn={loggedIn} 
             component={Main} 
