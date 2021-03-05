@@ -3,6 +3,6 @@ The API of "Around the U.S." with authorization and registration handled by the 
 
 Stack: React, Node, MongoDB
 
-Hosted website: https://www.vbowe.students.nomoreparties.site/
-Public IP: 20.51.237.103
+Hosted website: https://www.vkaround.students.nomoreparties.site/
+Public IP: 18.217.31.38
 
